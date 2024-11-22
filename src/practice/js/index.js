@@ -1,7 +1,8 @@
 import { $axios } from "./axiosHelper.js";
-import { createElements, createErrorElement } from "./createElement.js";
+import { createErrorElement } from "./createElement.js";
 
 window.addEventListener('DOMContentLoaded', () => {
+
   $axios('https://pokeapi.co/api/v2/pokemon/?limit=151').then(response => {
     // ポケモンの一覧情報を取得
     console.log(response);
@@ -48,12 +49,20 @@ window.addEventListener('DOMContentLoaded', () => {
           // 作成したli要素をulに追加
 
         }).catch(error => {
-          list.after(createErrorElement('エラーが発生しました。時間をおいて再度お試しください。'));
+          const err = createErrorElement('エラーが発生しました。時間をおいて再度お試しください。');
+          const main = document.querySelector('.main');
+          main.appendChild(err);
         });
 
       }).catch(error => {
-        img.after(createErrorElement('エラーが発生しました。時間をおいて再度お試しください。'));
+        const err = createErrorElement('エラーが発生しました。時間をおいて再度お試しください。');
+        const main = document.querySelector('.main');
+        main.appendChild(err);
       });
     };
+  }).catch(error => {
+    const err = createErrorElement('エラーが発生しました。時間をおいて再度お試しください。');
+    const main = document.querySelector('.main');
+    main.appendChild(err);
   });
 });
