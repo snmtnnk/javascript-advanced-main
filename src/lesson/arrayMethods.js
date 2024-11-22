@@ -26,3 +26,9 @@ const array = [
     className: 'piyo',
   },
 ];
+
+const newArray = array.map(val => ({
+  ...val, className: 'c-' + val.className
+}));
+
+console.log(newArray);
