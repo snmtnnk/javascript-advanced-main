@@ -15,13 +15,17 @@
 // 問題 1
 const returnPromise = () => {
   return new Promise((_resolve, reject) => {
-    setTimeout(() => {
+    if (Math.random() < 0.5) {
+      _resolve('成功しました');
+    } else{
       reject('エラーが発生しました');
-    }, 3000);
+    }
   });
 };
 
-returnPromise()
-  .catch(error => {
-    console.log(error);
-  });
+returnPromise().then(resolve => {
+  console.log(resolve);
+})
+.catch(error => {
+  console.log(error);
+});
